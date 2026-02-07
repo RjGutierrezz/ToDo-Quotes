@@ -1,0 +1,50 @@
+/* TODO: Add the color theme changer button */
+
+* {
+	margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+	--primary-color: #0d0c1d;
+	--secondary-color: #161b33;
+}
+
+html,
+body {
+	background-color: #f1dac4;
+	font-family: "DotGothic16", sans-serif;
+	padding: 20px 40px 20px 40px;
+}
+
+h1 {
+	font-size: 50px;
+}
+
+h3 {
+	font-size: 25px;
+}
+
+.container {
+	display: grid;
+	justify-content: center;
+	grid-template-columns: 500px 1fr;
+	margin-top: 50px;
+}
+
+.todo-container {
+	display: grid;
+	text-align: center;
+	padding: 0px 20px 0px 20px;
+}
+
+.quote-container {
+	display: grid;
+	grid-template-rows: auto 1fr;
+	border: 1px solid black;
+}
+
+.date-content,
+.quote-content {
+	border: 1px solid black;
+}
