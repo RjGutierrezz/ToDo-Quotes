@@ -25,21 +25,22 @@
       <div class="container">
         <!-- Left section of the body -->
         <div class="todo-container">
-
-          <input type="" name="" value="" placeholder="Create a task..." />
+          
+          <!-- I need this input to add the task via enter key from the user -->
+          <input id="task-input" type="" name="" value="" placeholder="Create a task..." />
 
           <!-- Had issue with the css properties not showing up due to the use of -->
           <!-- class instead of id. Using class confused the JS to use -->
           <!-- getElementById with the syntax of .list-container instead of -->
           <!-- #list-container -->
           <ul id="list-container">
-            <li class="checked">List 1
-            <li>List 2</li>
-            <li>List 3</li>
+            <!-- <li class="checked">List 1 </li> -->
+            <!-- <li>List 2</li> -->
+            <!-- <li>List 3</li> -->
           </ul>
 
           <div class="todo-footer">
-            <!-- TODO: Add a list counter here -->
+            <!-- DONE: Add a list counter here -->
             <p class="number-task">Numbers of tasks</p>
 
             <div class="filter">
@@ -49,7 +50,7 @@
               
             </div>
 
-            <!-- TODO: add a button to clear all completed tasks -->
+            <!-- DONE: add a button to clear all completed tasks -->
             <button class="clear-completed" type="">Clear Completed</button>
           </div>
         </div>
