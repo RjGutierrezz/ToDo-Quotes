@@ -35,14 +35,20 @@ button {
 .container {
 	display: grid;
 	justify-content: center;
-	grid-template-columns: 600px 1fr;
+
+  /* minmax prevents a column from affecting the other column */
+	grid-template-columns: minmax(0, 600px) minmax(320px, 1fr);
 	margin-top: 50px;
+
+  /* prevents the left column from expanding and affecting right column */
+  align-items: start;
 }
 
 .todo-container {
 	display: grid;
-	text-align: center;
+	text-align: initial;
 	padding: 0px 20px 0px 0px;
+  min-width: 0;
 }
 
 .todo-footer {
@@ -74,7 +80,8 @@ button {
 .quote-container {
 	display: grid;
 	grid-template-rows: auto 1fr;
-	border: 1px solid black;
+  min-width: 0;
+  border: 1px solid black;
 }
 
 /* APIs will be pulled from these two */

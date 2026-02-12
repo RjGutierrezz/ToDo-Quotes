@@ -1,7 +1,7 @@
 // TODO: 
 //  Add the color theme changer button
 //  Date the task was added needs to be displayed
-//  Input is affecting the other grid
+//  DONE: Input is affecting the other grid
 
 
 
