@@ -46,15 +46,13 @@ class TodoApp {
   constructor() {
     this.inputEl = document.getElementById("task-input");
     this.listEl = document.getElementById("list-container");
-    
-
     this.todo = [];
   }
 
   // method that gets called whenver the instance is called
   init(){
     this.bindEvents();
-    this.render();
+    // this.render();
   }
 
   // this allows the user to enter the task via enter key
@@ -73,16 +71,23 @@ class TodoApp {
     // items id
     this.listEl.addEventListener("click", (event) => {
       const li = event.target.closest("li");
-      if (!li) {
+      const actionButton = event.target.closest("[data-action]");
+      
+      if (!actionButton) return;
+      const action = actionButton.dataset.action;
+
+      if (action === "toggle") {
+        // pulls the id from the li dataset 
+        const id = li.dataset.id;
+        this.toggleTodo(id);
+      } else if (action === "delete") {
+        const id = li.dataset.id;
+        this.deleteTodo(id);
+      } else {
         return
       }
 
-      // pulls the id from the li dataset 
-      const id = li.dataset.id;
-      this.toggleTodo(id);
     })
-
-    // need to detect which item was clicked then call deleteTodo()
 
   }
 
@@ -114,9 +119,9 @@ class TodoApp {
 
 
   deleteTodo(id){
-    const target = this.todo.find((item) => item.id === id)
-
-    if (!target) return;
+    // filter() method returns items where the condition is true
+    this.todo = this.todo.filter((item) => item.id !== id)
+    this.render();
   }
 
   // Update the DOM about the changes
@@ -131,15 +136,40 @@ class TodoApp {
   }
 
   // render helper, to practice SOLID principle
+  // this method will create the li element and the images that needed to come
+  // along with it
   createTodoElement(todo) {
     const li = document.createElement("li");
-    li.textContent = todo.text;
     li.dataset.id = todo.id;
 
+    // Toggle Button
+    const toggleBtn = document.createElement("button");
+    toggleBtn.dataset.action = "toggle"
+
+    const imgToggle = document.createElement("img");
+    imgToggle.src = todo.completed ? "/images/checked.png" :
+      "/images/check_blanked.png";
+    imgToggle.className = "check-box"
+    toggleBtn.append(imgToggle);
+
+    const span = document.createElement("span")
+    span.textContent = todo.text;
+
+    // Delete Button
+    const deleteBtn = document.createElement("button");
+    deleteBtn.dataset.action = "delete";
+
+    const imgDelete = document.createElement("img");
+    imgDelete.src = "/images/delete.png"
+    imgDelete.className = "delete-box"
+    deleteBtn.append(imgDelete)
+
+    li.append(toggleBtn, span, deleteBtn)
+  
     if (todo.completed) {
-      // add the line-through
       li.classList.add("checked")
     }
+
     return li;
   }
 }

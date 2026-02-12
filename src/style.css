@@ -1,8 +1,3 @@
-TODO: 
- Add the color theme changer button
- Date the task was added needs to be displayed
- Input is affecting the other grid
-
 
 * {
 	margin: 0;
@@ -110,7 +105,6 @@ ul li{
   list-style: none;
   font-size: 20px;
   user-select: none;
-  cursor: pointer;
   padding: 12px 40px 12px 50px;
   position: relative;
   display: flex;
@@ -118,16 +112,15 @@ ul li{
 }
 
 /* before pseudo allows you to display the element before any action */
-ul li::before {
-  content: '';
+.check-box {
   position: absolute;
   height: 28px;
   width: 28px;
-  background-image: url('/images/check_blanked.png');
   background-size: cover;
   background-position: center;
   top: 12px;
   left: 8px;
+  cursor: pointer;
 }
 
 ul li.checked {
@@ -135,22 +128,17 @@ ul li.checked {
   text-decoration: line-through;
 }
 
-ul li.checked::before {
-  background-image: url('/images/checked.png');
-}
 
-ul li::after {
-  content: '';
+.delete-box {
   position: absolute;
   height: 28px;
   width: 28px;
-  background-image: url('/images/delete.png');
   background-size: cover;
   background-position: center;
   top: 12px;
   right: 8px;
+  cursor: pointer;
 }
-
 
 
 .date {
