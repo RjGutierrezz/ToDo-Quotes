@@ -14,8 +14,8 @@ function createUID() {
 // One task model
 class Todo {
   // second param already has a value so an argument is no need
-  constructor(text, completed=false) {
-    this.id = createUID();
+  constructor(text, completed=false, id = createUID()) {
+    this.id = id;
     this.text = text;
     this.completed = completed;
   }
@@ -30,13 +30,28 @@ class Todo {
 // local storage, read and write only, so the user can continue their work if
 // they had to leave the app
 class TodoStore {
-	constructor() {}
+	constructor(key = "todo-app-items") {
+    this.key = key
+  }
 
 	// get is used to display information
-  load(){}
+  load(){
+    const storage = localStorage.getItem(this.key);
+
+    if (!storage) return [];
+
+    try {
+      return JSON.parse(storage);
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
+  }
 
 	// set is used to manipulate the information
-  save(){}
+  save(todos){
+    return localStorage.setItem(this.key, JSON.stringify(todos))
+  }
 }
 
 
@@ -47,12 +62,17 @@ class TodoApp {
     this.inputEl = document.getElementById("task-input");
     this.listEl = document.getElementById("list-container");
     this.todo = [];
+    this.store = new TodoStore();
   }
 
   // method that gets called whenver the instance is called
   init(){
+    // load raw data
+    const raw = this.store.load();
+
+    this.todo = raw.map(item => new Todo(item.text, item.completed));
     this.bindEvents();
-    // this.render();
+    this.render();
   }
 
   // this allows the user to enter the task via enter key
@@ -101,6 +121,9 @@ class TodoApp {
     this.todo.push(input) // pushing input into the todo array
     console.log(this.todo);
 
+    // to update the localStorage
+    this.store.save(this.todo);
+
     // use this on method calls inside a method
     this.render();
   }
@@ -114,6 +137,9 @@ class TodoApp {
 
     // marks it completed and vice versa
     target.toggle();
+
+    // to update the localStorage
+    this.store.save(this.todo);
     this.render();
   }
 
@@ -121,6 +147,9 @@ class TodoApp {
   deleteTodo(id){
     // filter() method returns items where the condition is true
     this.todo = this.todo.filter((item) => item.id !== id)
+
+    // to update the localStorage
+    this.store.save(this.todo);
     this.render();
   }
 
@@ -145,11 +174,12 @@ class TodoApp {
     // Toggle Button
     const toggleBtn = document.createElement("button");
     toggleBtn.dataset.action = "toggle"
+    toggleBtn.className = "check-box"
 
     const imgToggle = document.createElement("img");
     imgToggle.src = todo.completed ? "/images/checked.png" :
       "/images/check_blanked.png";
-    imgToggle.className = "check-box"
+    // imgToggle.className = "check-box"
     toggleBtn.append(imgToggle);
 
     const span = document.createElement("span")
@@ -158,10 +188,11 @@ class TodoApp {
     // Delete Button
     const deleteBtn = document.createElement("button");
     deleteBtn.dataset.action = "delete";
+    deleteBtn.className = "delete-box";
 
     const imgDelete = document.createElement("img");
     imgDelete.src = "/images/delete.png"
-    imgDelete.className = "delete-box"
+    // imgDelete.className = "delete-box"
     deleteBtn.append(imgDelete)
 
     li.append(toggleBtn, span, deleteBtn)

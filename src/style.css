@@ -123,9 +123,9 @@ ul li{
   position: absolute;
   height: 28px;
   width: 28px;
-  background-size: cover;
-  background-position: center;
-  top: 12px;
+  /* background-size: cover; */
+  /* background-position: center; */
+  top: 15px;
   left: 8px;
   cursor: pointer;
 }
@@ -142,7 +142,7 @@ ul li.checked {
   width: 28px;
   background-size: cover;
   background-position: center;
-  top: 12px;
+  top: 15px;
   right: 8px;
   cursor: pointer;
 }
