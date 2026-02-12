@@ -26,7 +26,9 @@ class Todo {
   }
 }
 
-// local storage, read and write only
+
+// local storage, read and write only, so the user can continue their work if
+// they had to leave the app
 class TodoStore {
 	constructor() {}
 
@@ -44,10 +46,12 @@ class TodoApp {
   constructor() {
     this.inputEl = document.getElementById("task-input");
     this.listEl = document.getElementById("list-container");
+    
+
     this.todo = [];
   }
 
-  // methods
+  // method that gets called whenver the instance is called
   init(){
     this.bindEvents();
     this.render();
@@ -55,12 +59,31 @@ class TodoApp {
 
   // this allows the user to enter the task via enter key
   bindEvents(){
+
+    // listener for the enter key when inputting task
     this.inputEl.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
         this.addTodo(this.inputEl.value);
         this.inputEl.value = "";
       }
     })
+
+    // listener for completing a task
+    // need to detect which item was clicked and call toggleTodo() with that
+    // items id
+    this.listEl.addEventListener("click", (event) => {
+      const li = event.target.closest("li");
+      if (!li) {
+        return
+      }
+
+      // pulls the id from the li dataset 
+      const id = li.dataset.id;
+      this.toggleTodo(id);
+    })
+
+    // need to detect which item was clicked then call deleteTodo()
+
   }
 
   // Adding an item to the array works
@@ -78,8 +101,23 @@ class TodoApp {
   }
 
 
-  toggleTodo(id){}
-  deleteTodo(id){}
+  toggleTodo(id){
+    // to find the id from the array
+    const target = this.todo.find((item) => item.id === id)
+    
+    if (!target) return;
+
+    // marks it completed and vice versa
+    target.toggle();
+    this.render();
+  }
+
+
+  deleteTodo(id){
+    const target = this.todo.find((item) => item.id === id)
+
+    if (!target) return;
+  }
 
   // Update the DOM about the changes
   render(){
