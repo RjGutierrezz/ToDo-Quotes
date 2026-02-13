@@ -58,13 +58,20 @@ class TodoStore {
 
 // UI + events + app state
 class TodoApp {
+  currentFilter = "all";
+
   constructor() {
     this.inputEl = document.getElementById("task-input");
     this.listEl = document.getElementById("list-container");
     this.todo = [];
     this.store = new TodoStore();
     
-    this.inputCount = document.getElementById("number-task")
+    this.inputCount = document.getElementById("number-task");
+
+    this.allBtn = document.getElementById("allBtn");
+    this.activeBtn = document.getElementById("activeBtn");
+    this.completedBtn = document.getElementById("completedBtn")
+    this.clearBtn = document.getElementById("clearBtn");
   }
 
   // method that gets called whenver the instance is called
@@ -73,10 +80,23 @@ class TodoApp {
     const raw = this.store.load();
 
     // convert raw objects into todo instances
-    this.todo = raw.map(item => new Todo(item.text, item.completed));
+    this.todo = raw.map(item => new Todo(item.text, item.completed, item.id));
     this.bindEvents();
     this.render();
   }
+
+  filterTask(){
+    if (this.currentFilter === "all") {
+      return this.todo;
+    } else if (this.currentFilter === "active") {
+      return this.todo.filter((item) => !item.completed);
+    } else if (this.currentFilter === "completed") {
+      return this.todo.filter((item) => item.completed);
+    } else {
+      return [];
+    }
+  }
+
 
   updateCount(){
     const taskLeft = this.todo.filter((item) => !item.completed).length;
@@ -125,7 +145,34 @@ class TodoApp {
       } else {
         return
       }
+    })
 
+    // for all button to show all the task inside the array
+    this.allBtn.addEventListener("click", () => {
+      this.currentFilter = "all";
+      this.render();
+    })
+
+    // for active button to show remaining task that aren't completed
+    this.activeBtn.addEventListener("click", () => {
+      this.currentFilter = "active";
+      this.render();
+    })
+
+    // for completed button to show all the task that has been completed and
+    // hasnt been deleted yet
+    this.completedBtn.addEventListener("click", () => {
+      this.currentFilter = "completed";
+      this.render(); 
+    })
+
+    // for clear button to remove all the marked task from the array and
+    // localStorage
+    this.clearBtn.addEventListener("click", () => {
+      this.todo = this.todo.filter((item) => !item.completed);
+
+      this.store.save(this.todo);
+      this.render();
     })
 
   }
@@ -176,8 +223,11 @@ class TodoApp {
   render(){
     // makes sure the list is empty for now
     this.listEl.innerHTML = "";
-    
-    this.todo.forEach((todoTask) => {
+   
+    // going to use filter method to allow the render to display which button
+    // event was triggered
+    const visibleTodos = this.filterTask();
+    visibleTodos.forEach((todoTask) => {
       let li = this.createTodoElement(todoTask);
       this.listEl.appendChild(li);
     })
