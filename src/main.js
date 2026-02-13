@@ -63,6 +63,8 @@ class TodoApp {
     this.listEl = document.getElementById("list-container");
     this.todo = [];
     this.store = new TodoStore();
+    
+    this.inputCount = document.getElementById("number-task")
   }
 
   // method that gets called whenver the instance is called
@@ -70,9 +72,26 @@ class TodoApp {
     // load raw data
     const raw = this.store.load();
 
+    // convert raw objects into todo instances
     this.todo = raw.map(item => new Todo(item.text, item.completed));
     this.bindEvents();
     this.render();
+  }
+
+  updateCount(){
+    const taskLeft = this.todo.filter((item) => !item.completed).length;
+
+    // now modify the UI element
+    let text;
+
+    // want to make sure I dont forget how to use if/else statements
+    if (taskLeft === 1) {
+      text = taskLeft + " item left";
+    } else {
+      text = taskLeft + " items left";
+    }
+
+    this.inputCount.textContent = text;
   }
 
   // this allows the user to enter the task via enter key
@@ -162,6 +181,8 @@ class TodoApp {
       let li = this.createTodoElement(todoTask);
       this.listEl.appendChild(li);
     })
+
+    this.updateCount();
   }
 
   // render helper, to practice SOLID principle
@@ -196,7 +217,7 @@ class TodoApp {
     deleteBtn.append(imgDelete)
 
     li.append(toggleBtn, span, deleteBtn)
-  
+
     if (todo.completed) {
       li.classList.add("checked")
     }
