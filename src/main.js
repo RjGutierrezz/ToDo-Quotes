@@ -72,6 +72,8 @@ class TodoApp {
     this.activeBtn = document.getElementById("activeBtn");
     this.completedBtn = document.getElementById("completedBtn")
     this.clearBtn = document.getElementById("clearBtn");
+
+    this.dateEl = document.querySelector(".date")
   }
 
   // method that gets called whenver the instance is called
@@ -82,7 +84,36 @@ class TodoApp {
     // convert raw objects into todo instances
     this.todo = raw.map(item => new Todo(item.text, item.completed, item.id));
     this.bindEvents();
+
+    this.updateDateRender();
+
+    setInterval(() => this.updateDateRender(), 1000);
     this.render();
+
+
+  }
+
+  dateFormat(){
+    const now = new Date();
+
+    const datePart = now.toLocaleDateString(undefined, {
+      weekday: "long",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+
+    const timePart = now.toLocaleTimeString(undefined, {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    })
+
+    return `${datePart} : ${timePart}`;
+  }
+
+  updateDateRender(){
+    this.dateEl.textContent = this.dateFormat();
   }
 
   filterTask(){

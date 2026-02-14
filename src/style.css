@@ -85,7 +85,7 @@ button {
 }
 
 .big-three.is-active {
-  transform: translate(4px, 4px);
+  transform: translate(2px, 2px);
   box-shadow: 2px 2px 0px black;
 }
 
