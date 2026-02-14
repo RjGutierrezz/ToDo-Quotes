@@ -101,7 +101,7 @@ class TodoApp {
     setInterval(() => this.updateDateRender(), 1000);
 
     this.fetchQuote();
-    setInterval(() => this.fetchQuote(), 15 * 16 * 1000);
+    setInterval(() => this.fetchQuote(), 15 * 60 * 1000);
 
     this.loadTheme();
     this.applyTheme();

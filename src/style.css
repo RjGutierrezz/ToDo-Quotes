@@ -281,7 +281,7 @@ ul li.checked {
   padding: 10px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 430px) {
   html, body {
     padding 16px;
   }
