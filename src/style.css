@@ -8,20 +8,27 @@
 	--bg-color: #fdf0d5;
 	--font-color: #000000;
   --toggle-color: #f7e4bc;
-  --handle-bg: #faf2e1;
 }
 
 html,
 body {
 	background-color: var(--bg-color);
+  color: var(--font-color);
 	font-family: "DotGothic16", sans-serif;
 	padding: 20px 40px 20px 40px;
 }
 
-body.dark-mode {
+html[data-theme="dark"] {
   --bg-color: #000000;
   --font-color: #fdf0d5;
+  --toggle-color: #121111;
 }
+
+html[data-theme="dark"] .check-box img,
+html[data-theme="dark"] .delete-box img {
+  filter: invert(95%) sepia(15%) saturate(200%) hue-rotate(350deg);
+}
+
 
 h1 {
 	font-size: 50px;
@@ -42,13 +49,24 @@ button {
 
 .headline {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-/* for toggle slider, did not like it */
-/* #mode { */
-/*   display: none; */
-/* } */
-/**/
+#themeBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 32px;
+  padding: 0;
+}
+
+.theme-btn {
+  align-items: center;
+  justify-content: end;
+}
 /* .toggle-switch { */
 /*   position: relative; */
 /*   display: inline-block; */
@@ -77,31 +95,34 @@ button {
 /*   justify-content: center; */
 /*   box-shadow: 0 2px 5px rgba(0,0,0,0.2); */
 /* } */
-/**/
-/* .icon-moon { */
-/*   display: none; */
-/* } */
-/**/
-/* .icon-sun { */
-/*   display: block; */
-/*   font-size: 18px; */
-/*   height: 20px; */
-/*   width: 20px; */
-/* } */
-/**/
-/* #mode:checked + .toggle-switch .switch-handle { */
-/*   transform: translateX(40px); */
-/* } */
-/**/
-/* #mode:checked + .toggle-switch .icon-sun { */
-/*   display: none; */
-/* } */
-/**/
-/* #mode:checked + .toggle-switch .icon-moon { */
-/*   display: block; */
-/*   font-size: 16px; */
-/* } */
 
+#themeBtn .icon-sun, #themeBtn .icon-moon{
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+#themeBtn .icon-moon {
+  filter: invert(95%) sepia(15%) saturate(200%) hue-rotate(350deg);
+
+}
+
+#themeBtn > img {
+  width: 25px;
+  height: 25px;
+  display: block;
+  object-fit: contain;
+}
+
+.theme-btn .icon-moon {
+  display: none;
+}
+
+
+.theme-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--font-color);
+}
 
 .container {
 	display: grid;
@@ -143,6 +164,7 @@ button {
 }
 
 .big-three, .clear-completed {
+  color: var(--font-color);
   border: 2px solid var(--font-color);
   box-shadow: 5px 5px 0px var(--font-color);
   padding: 4px 10px;
@@ -153,11 +175,13 @@ button {
 .big-three:active, .clear-completed:active {
   box-shadow: 2px 2px 0px var(--font-color);
   transform: translate(4px, 4px);
+  color: var(--font-color);
 }
 
 .big-three.is-active {
   transform: translate(2px, 2px);
   box-shadow: 2px 2px 0px var(--font-color);
+  color: var(--font-color);
 }
 
 .clear-completed {

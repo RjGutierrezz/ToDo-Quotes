@@ -84,6 +84,7 @@ class TodoApp {
     this.quotesApi = "https://quoteslate.vercel.app/api/quotes/random";
 
     // Theme default
+    this.themeBtn = document.getElementById("themeBtn");
     this.theme = "light";
     this.themeKey = "todo-app-theme";
   }
@@ -95,7 +96,6 @@ class TodoApp {
 
     // convert raw objects into todo instances
     this.todo = raw.map(item => new Todo(item.text, item.completed, item.id));
-    this.bindEvents();
 
     // this.updateDateRender();
     // setInterval(() => this.updateDateRender(), 1000);
@@ -103,7 +103,44 @@ class TodoApp {
     // this.fetchQuote();
     // setInterval(() => this.fetchQuote(), 15 * 16 * 1000);
 
+    this.loadTheme();
+    this.applyTheme();
+    this.bindEvents();
     this.render();
+  }
+
+  // to load the theme from the localStorage when revisiting
+  loadTheme(){
+    const saveTheme = localStorage.getItem(this.themeKey);
+    
+    this.theme = saveTheme === "dark" ? "dark" : "light";
+  }
+
+  applyTheme(){
+    document.documentElement.dataset.theme = this.theme;
+
+    this.themeBtn.classList.remove("is-active");
+
+    const sun = this.themeBtn.querySelector(".icon-sun");
+    const moon = this.themeBtn.querySelector(".icon-moon");
+
+    if(this.theme === "dark") {
+      sun.style.display= "none";
+      moon.style.display= "block"
+    } else {
+      sun.style.display= "block";
+      moon.style.display= "none"
+    }
+  }
+
+  toggleTheme(){
+    if(this.theme === "light") {
+      this.theme = "dark"
+    } else 
+    { this.theme = "light"}
+  
+    localStorage.setItem(this.themeKey, this.theme);
+    this.applyTheme();
   }
 
   // request the quote from the API
@@ -194,6 +231,11 @@ class TodoApp {
 
   // this allows the user to enter the task via enter key
   bindEvents(){
+
+    // listener for the theme button
+    this.themeBtn.addEventListener("click", () => {
+      this.toggleTheme();
+    })
 
     // listener for the enter key when inputting task
     this.inputEl.addEventListener("keydown", (event) => {
