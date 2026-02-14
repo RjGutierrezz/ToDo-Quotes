@@ -55,7 +55,6 @@ class TodoStore {
 }
 
 
-
 // UI + events + app state
 class TodoApp {
   currentFilter = "all";
@@ -64,6 +63,7 @@ class TodoApp {
     this.inputEl = document.getElementById("task-input");
     this.listEl = document.getElementById("list-container");
     this.todo = [];
+
     this.store = new TodoStore();
     
     this.inputCount = document.getElementById("number-task");
@@ -73,7 +73,10 @@ class TodoApp {
     this.completedBtn = document.getElementById("completedBtn")
     this.clearBtn = document.getElementById("clearBtn");
 
-    this.dateEl = document.querySelector(".date")
+    this.dateEl = document.querySelector(".date");
+    
+    this.quoteContainer = document.querySelector(".quote");
+    this.quotesApi = "https://quoteslate.vercel.app/api/quotes/random";
   }
 
   // method that gets called whenver the instance is called
@@ -86,11 +89,29 @@ class TodoApp {
     this.bindEvents();
 
     this.updateDateRender();
-
     setInterval(() => this.updateDateRender(), 1000);
+
+    this.fetchQuote();
+    setInterval(() => this.fetchQuote(), 15 * 16 * 1000);
+
     this.render();
+  }
 
+  // request the quote from the API
+  async fetchQuote(){
+    try {
 
+      const response = await fetch(this.quotesApi)
+      console.log("are you working api")
+      const data = await response.json();
+      
+      this.quoteContainer.innerHTML = `<p>${data.quote} </p> <cite>~ ${data.author}</cite>`
+      
+      console.log(data);
+
+    } catch (error) {
+      console.log("could not connect with the Quote API right now");
+    }
   }
 
   dateFormat(){
