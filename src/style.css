@@ -283,7 +283,7 @@ ul li.checked {
 
 @media (max-width: 430px) {
   html, body {
-    padding 16px;
+    padding 10px;
   }
 
   .headline {
@@ -324,7 +324,7 @@ ul li.checked {
 
   ul li {
     font-size: 18px;
-    padding: 12px 36px 12px 46px;
+    padding: 12px 36px 12px 36px;
   }
 
   p.quote {
