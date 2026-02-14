@@ -97,11 +97,11 @@ class TodoApp {
     // convert raw objects into todo instances
     this.todo = raw.map(item => new Todo(item.text, item.completed, item.id));
 
-    // this.updateDateRender();
-    // setInterval(() => this.updateDateRender(), 1000);
-    //
-    // this.fetchQuote();
-    // setInterval(() => this.fetchQuote(), 15 * 16 * 1000);
+    this.updateDateRender();
+    setInterval(() => this.updateDateRender(), 1000);
+
+    this.fetchQuote();
+    setInterval(() => this.fetchQuote(), 15 * 16 * 1000);
 
     this.loadTheme();
     this.applyTheme();

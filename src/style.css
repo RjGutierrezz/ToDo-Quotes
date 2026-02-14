@@ -18,6 +18,7 @@ body {
 	padding: 20px 40px 20px 40px;
 }
 
+/* for dark theme */
 html[data-theme="dark"] {
   --bg-color: #000000;
   --font-color: #fdf0d5;
@@ -280,4 +281,54 @@ ul li.checked {
   padding: 10px;
 }
 
+@media (max-width: 900px) {
+  html, body {
+    padding 16px;
+  }
 
+  .headline {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  #themeBtn {
+    margin-left: 0;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .todo-container {
+    padding: 0;
+  }
+
+  .todo-footer {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .number-task,
+  .filter,
+  .clear-completed {
+    justify-self: center;
+    grid-column: auto;
+  }
+
+  .filter {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  ul li {
+    font-size: 18px;
+    padding: 12px 36px 12px 46px;
+  }
+
+  p.quote {
+    padding: 20px;
+    font-size: 18px;
+  }
+}
