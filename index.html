@@ -16,10 +16,27 @@
       <!-- Header section of the app -->
       <div class="navigator">
         <h1>TODO-App</h1>
-        <h3>
-          The journey to success starts with the first step, no matter how
-          small.
-        </h3>
+        <div class="headline">
+          <h3>
+            The journey to success starts with the first step, no matter how
+            small.
+          </h3>
+
+          <!-- used for toggle slider but it does not look with the theme -->
+          <!-- <input type="checkbox" id="mode"> -->
+          <!-- <label for="mode" class="toggle-switch"> -->
+          <!--   <div class="switch-handle"> -->
+          <!--     <span class="icon-sun">☼</span> -->
+          <!--     <span class="icon-moon">☾</span> -->
+          <!--   </div> -->
+          <!-- </label> -->
+          
+          <button type="button" id="themeBtn" class="big-three themeBtn">
+            <img class="icon-sun" src="/images/sun.png" alt="Light theme" />
+            <img class="icon-sun" src="/images/sun.png" alt="Light theme" />
+          </button>
+
+        </div>
       </div>
 
       <div class="container">
@@ -67,13 +84,14 @@
 
         <!-- Right section of the body -->
         <div class="quote-container">
-          <div class="date-content">
+<div class="date-content">
             <!-- Pull current date here -->
             <p class="date">Dates</p>
           </div>
 
           <div class="quote-content">
             <p class="quote">Quotes</p>
+            <p class="quote-author">Author</p>
           </div>
         </div>
       </div>

@@ -5,15 +5,22 @@
 }
 
 :root {
-	--primary-color: #0d0c1d;
-	--secondary-color: #161b33;
+	--bg-color: #fdf0d5;
+	--font-color: #000000;
+  --toggle-color: #f7e4bc;
+  --handle-bg: #faf2e1;
 }
 
 html,
 body {
-	background-color: #f1dac4;
+	background-color: var(--bg-color);
 	font-family: "DotGothic16", sans-serif;
 	padding: 20px 40px 20px 40px;
+}
+
+body.dark-mode {
+  --bg-color: #000000;
+  --font-color: #fdf0d5;
 }
 
 h1 {
@@ -27,10 +34,74 @@ h3 {
 button {
   font-family: "DotGothic16", sans-serif;
   border: none;
-  background-color: #f1dac4;
+  background-color: var(--bg-color);
   font-size: 14px;
+  font-weight: bold;
   cursor: pointer;
 }
+
+.headline {
+  display: flex;
+}
+
+/* for toggle slider, did not like it */
+/* #mode { */
+/*   display: none; */
+/* } */
+/**/
+/* .toggle-switch { */
+/*   position: relative; */
+/*   display: inline-block; */
+/*   width: 80px; */
+/*   height: 40px; */
+/*   background-color: var(--bg-color); */
+/*   /* border-radius: 50px; */ */
+/*   cursor: pointer; */
+/*   transition: background-color 0.4s; */
+/*   box-shadow: 5px 5px 0px var(--font-color),  */
+/*               rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset,  */
+/*               rgba(0, 0, 0, 0.9) 0px 0px 0px 2px inset; */
+/* } */
+/**/
+/* .switch-handle { */
+/*   position: absolute; */
+/*   top: 4px; */
+/*   left: 4px; */
+/*   width: 32px; */
+/*   height: 32px; */
+/*   background-color: var(--handle-bg); */
+/*   /* border-radius: 50%; */ */
+/*   transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); */
+/*   display: flex; */
+/*   align-items: center; */
+/*   justify-content: center; */
+/*   box-shadow: 0 2px 5px rgba(0,0,0,0.2); */
+/* } */
+/**/
+/* .icon-moon { */
+/*   display: none; */
+/* } */
+/**/
+/* .icon-sun { */
+/*   display: block; */
+/*   font-size: 18px; */
+/*   height: 20px; */
+/*   width: 20px; */
+/* } */
+/**/
+/* #mode:checked + .toggle-switch .switch-handle { */
+/*   transform: translateX(40px); */
+/* } */
+/**/
+/* #mode:checked + .toggle-switch .icon-sun { */
+/*   display: none; */
+/* } */
+/**/
+/* #mode:checked + .toggle-switch .icon-moon { */
+/*   display: block; */
+/*   font-size: 16px; */
+/* } */
+
 
 .container {
 	display: grid;
@@ -72,21 +143,21 @@ button {
 }
 
 .big-three, .clear-completed {
-  border: 2px solid black;
-  box-shadow: 5px 5px 0px #000000;
+  border: 2px solid var(--font-color);
+  box-shadow: 5px 5px 0px var(--font-color);
   padding: 4px 10px;
   transform: translate(0, 0);
   transition: transform 120ms ease, box-shadow 120ms ease;
 }
 
 .big-three:active, .clear-completed:active {
-  box-shadow: 2px 2px 0px black;
+  box-shadow: 2px 2px 0px var(--font-color);
   transform: translate(4px, 4px);
 }
 
 .big-three.is-active {
   transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0px black;
+  box-shadow: 2px 2px 0px var(--font-color);
 }
 
 .clear-completed {
@@ -98,13 +169,13 @@ button {
 	display: grid;
 	grid-template-rows: auto 1fr;
   min-width: 0;
-  border: 1px solid black;
+  border: 1px solid var(--font-color);
 }
 
 /* APIs will be pulled from these two */
 .date-content,
 .quote-content {
-	border: 1px solid black;
+	border: 1px solid var(--font-color);
 }
 
 p.quote {
@@ -113,14 +184,20 @@ p.quote {
   padding: 60px;
 }
 
+.quote-author {
+  padding: 20px;
+  align-self: end;
+  text-align: right;
+}
+
 
 
 input {
   background-color: transparent;
   outline: none;
-  border: 2px solid black;
+  border: 2px solid var(--font-color);
   font-size: 18px;
-  color: black;
+  color: var(--font-color);
   padding: 5px;
   padding-left: 10px;
 	font-family: "DotGothic16", sans-serif;

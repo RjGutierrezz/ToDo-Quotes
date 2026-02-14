@@ -66,17 +66,26 @@ class TodoApp {
 
     this.store = new TodoStore();
     
+    // Input Count
     this.inputCount = document.getElementById("number-task");
 
+    // Buttons
     this.allBtn = document.getElementById("allBtn");
     this.activeBtn = document.getElementById("activeBtn");
     this.completedBtn = document.getElementById("completedBtn")
     this.clearBtn = document.getElementById("clearBtn");
 
+    // Date and Time
     this.dateEl = document.querySelector(".date");
     
+    // Quote
     this.quoteContainer = document.querySelector(".quote");
+    this.authorContainer = document.querySelector(".quote-author")
     this.quotesApi = "https://quoteslate.vercel.app/api/quotes/random";
+
+    // Theme default
+    this.theme = "light";
+    this.themeKey = "todo-app-theme";
   }
 
   // method that gets called whenver the instance is called
@@ -88,11 +97,11 @@ class TodoApp {
     this.todo = raw.map(item => new Todo(item.text, item.completed, item.id));
     this.bindEvents();
 
-    this.updateDateRender();
-    setInterval(() => this.updateDateRender(), 1000);
-
-    this.fetchQuote();
-    setInterval(() => this.fetchQuote(), 15 * 16 * 1000);
+    // this.updateDateRender();
+    // setInterval(() => this.updateDateRender(), 1000);
+    //
+    // this.fetchQuote();
+    // setInterval(() => this.fetchQuote(), 15 * 16 * 1000);
 
     this.render();
   }
@@ -105,7 +114,8 @@ class TodoApp {
       console.log("are you working api")
       const data = await response.json();
       
-      this.quoteContainer.innerHTML = `<p>${data.quote} </p> <cite>~ ${data.author}</cite>`
+      this.quoteContainer.innerHTML = `<p>${data.quote} </p>`;
+      this.authorContainer.innerHTML = `<p>~ ${data.author}</p>`
       
       console.log(data);
 
