@@ -56,7 +56,6 @@ button {
   grid-template-columns: 1fr auto 1fr;
   margin-top: 10px;
   padding: 10px;
-
 }
 
 .number-task {
@@ -68,8 +67,26 @@ button {
 .filter {
   grid-column: 2;
   display: flex;
-  gap: 3px;
+  gap: 15px;
   justify-content: center;
+}
+
+.big-three, .clear-completed {
+  border: 2px solid black;
+  box-shadow: 5px 5px 0px #000000;
+  padding: 4px 10px;
+  transform: translate(0, 0);
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.big-three:active, .clear-completed:active {
+  box-shadow: 2px 2px 0px black;
+  transform: translate(4px, 4px);
+}
+
+.big-three.is-active {
+  transform: translate(4px, 4px);
+  box-shadow: 2px 2px 0px black;
 }
 
 .clear-completed {

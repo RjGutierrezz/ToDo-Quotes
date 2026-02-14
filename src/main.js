@@ -97,6 +97,22 @@ class TodoApp {
     }
   }
 
+  // method to add the is-active css once the button is selected
+  activeButton() {
+    this.allBtn.classList.remove("is-active");
+    this.activeBtn.classList.remove("is-active");
+    this.completedBtn.classList.remove("is-active");
+
+    if(this.currentFilter === "all") {
+      this.allBtn.classList.add("is-active");
+    } else if (this.currentFilter === "active") {
+      this.activeBtn.classList.add("is-active");
+    } else if (this.currentFilter === "completed") {
+      this.completedBtn.classList.add("is-active");
+    }
+
+  }
+
 
   updateCount(){
     const taskLeft = this.todo.filter((item) => !item.completed).length;
@@ -105,7 +121,7 @@ class TodoApp {
     let text;
 
     // want to make sure I dont forget how to use if/else statements
-    if (taskLeft === 1) {
+    if (taskLeft === 1 || taskLeft === 0) {
       text = taskLeft + " item left";
     } else {
       text = taskLeft + " items left";
@@ -233,6 +249,7 @@ class TodoApp {
     })
 
     this.updateCount();
+    this.activeButton();
   }
 
   // render helper, to practice SOLID principle
