@@ -201,6 +201,8 @@ button {
 .date-content,
 .quote-content {
 	border: 1px solid var(--font-color);
+  padding: 1px;
+  font-size: 18px;
 }
 
 p.quote {
