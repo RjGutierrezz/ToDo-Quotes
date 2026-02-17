@@ -6,7 +6,7 @@
   <br />
 </div>
 
-<h3 align="center">ToDo App</h3>
+<h3 align="center">Tiny Wins Matter</h3>
 
 # Welcome to my App 👋
 
