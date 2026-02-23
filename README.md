@@ -10,7 +10,7 @@
 
 # Welcome to my App 👋
 
-This is my responsive retro-inspired Todo app built with vanilla JavaScript (Vite) to practice OOP, DOM rendering, and state management. Unlike typical Todo apps, this project integrates dynamic motivational quotes to reinforce progress and consistency while completing daily tasks.
+This is my responsive retro-inspired Todo app built with vanilla JavaScript (Vite) to practice OOP, DOM rendering, and state management. Unlike typical Todo apps, this project integrates dynamic motivational quotes to reinforce progress and consistency while completing daily tasks. The app includes light and dark mode, along with motivational quotes to make the experience feel more personal and encouraging. It uses localStorage to persist tasks and theme preferences, allowing the user experience to remain consistent across sessions.
 
 ## Features
 
